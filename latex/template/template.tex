@@ -1,0 +1,43 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{datetime}
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{float}
+\usepackage{caption}
+\bibliographystyle{abbrvnat}
+
+[-IMPORTS-]
+
+% Slightly tighter caption typography
+\captionsetup{font=small,labelfont=bf,skip=4pt}
+
+% Hyperlink colors
+\hypersetup{colorlinks=true, allcolors=blue}
+
+\title{[-doc.title-]}
+
+\author{[-doc.authors|join(" \\and ", "name")-]}
+
+\newdate{articleDate}{[-doc.date.day-]}{[-doc.date.month-]}{[-doc.date.year-]}
+\date{\displaydate{articleDate}}
+
+\begin{document}
+\maketitle
+[# if parts.abstract #]\begin{abstract}[-parts.abstract-]\end{abstract}[# endif #]
+
+[# if options.link #]
+\newcommand{\documentnote}[1]{{%
+  \let\thempfn\relax%
+  \footnotetext[0]{\emph{#1}}%
+}}
+\documentnote{Available online at:\\ \href{[-options.link-]}{[-options.link-]}}
+[# endif #]
+
+[-CONTENT-]
+
+[# if doc.bibliography #]
+\bibliography{[- doc.bibliography | join(", ") -]}
+[# endif #]
+\end{document}

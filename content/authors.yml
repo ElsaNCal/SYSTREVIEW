@@ -1,0 +1,88 @@
+version: 1
+
+project:
+  affiliations:
+    - id: anthropic
+      name: Anthropic
+      city: San Francisco
+      state: California
+      country: United States
+    - id: aind
+      name: Allen Institute for Neural Dynamics
+      city: Seattle
+      state: Washington
+      country: United States
+
+  contributors:
+    - id: ai-pipeline
+      name: Claude
+      corresponding: false
+      roles:
+        - Investigation
+        - Data Curation
+        - Writing – original draft
+        - Visualization
+        - Formal Analysis
+      affiliations:
+        - anthropic
+      first_name: Claude
+      last_name: Opus 4.6
+      career_stage: AI Research Tool
+      is_ai_tool: true
+      credit_levels:
+        - role: Investigation
+          level: lead
+          description: "Searched literature databases; retrieved and extracted evidence via parallel agent delegations"
+        - role: Data Curation
+          level: lead
+          description: "Built structured evidence JSONs, citation_key_map, author_name_table from database APIs"
+        - role: "Writing – Original Draft"
+          level: lead
+          description: "Drafted all sections following scaffold, evidence packages, and style guide"
+        - role: Visualization
+          level: equal
+          description: "Generated publication-quality figures from evidence data"
+        - role: Formal Analysis
+          level: lead
+          description: "Ran blinded figure audits, blinded text criticism, and citation verification"
+      section_contributions:
+        - section: all-sections
+          description: Drafted all sections from evidence packages under orchestrator constraints
+          effort: lead
+
+    - id: jerome-lecoq
+      name: Jérôme Lecoq
+      corresponding: true
+      email: jerome.lecoq@alleninstitute.org
+      roles:
+        - Conceptualization
+        - Methodology
+        - Software
+        - Supervision
+        - Writing – review & editing
+      affiliations:
+        - aind
+      first_name: Jérôme
+      last_name: Lecoq
+      career_stage: Principal Investigator
+      is_ai_tool: false
+      credit_levels:
+        - role: Conceptualization
+          level: lead
+          description: Defined the review scope, framing, and evidence standards
+        - role: Methodology
+          level: lead
+          description: Designed the computational review and validation workflow
+        - role: Software
+          level: lead
+          description: Developed and maintained the review pipeline tooling
+        - role: Supervision
+          level: lead
+          description: Supervised pipeline execution and approved phase outputs
+        - role: "Writing – Review & Editing"
+          level: equal
+          description: Reviewed outputs and directed revisions
+      section_contributions:
+        - section: all-sections
+          description: Scoped, supervised, and approved all phase outputs
+          effort: lead
