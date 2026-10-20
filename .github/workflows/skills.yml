@@ -1,0 +1,30 @@
+name: Skill manifest
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  manifest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # Standard library only — no dependencies to install.
+      - name: Verify skills/manifest.json matches skills/
+        run: python scripts/build_skill_manifest.py --check
+
+      # The repository must agree with itself: skill counts, README tables and
+      # phase columns against the orchestrator's phase index, gates routed,
+      # generation quoted consistently, referenced files present.
+      - name: Template consistency audit
+        run: python scripts/check_template_consistency.py
