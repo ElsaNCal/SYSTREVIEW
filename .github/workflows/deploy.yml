@@ -1,0 +1,68 @@
+name: Build and Deploy MyST Site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: |
+          pip install mystmd jupyter matplotlib numpy pandas seaborn
+          npm install -g mystmd
+          npm install yaml
+
+      - name: Execute figure notebooks
+        run: |
+          if ls figures/notebooks/*.ipynb 1>/dev/null 2>&1; then
+            for nb in figures/notebooks/*.ipynb; do
+              echo "Executing $nb..."
+              jupyter execute "$nb" --timeout=120
+            done
+          else
+            echo "No figure notebooks found"
+          fi
+
+      - name: Build MyST site
+        run: myst build --html
+
+      - name: Upload Pages artifact
+        if: github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _build/html
+
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

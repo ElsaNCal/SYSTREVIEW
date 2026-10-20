@@ -1,0 +1,52 @@
+version: 1
+extends:
+  - content/authors.yml
+project:
+  title: "REVIEW TITLE — Update in myst.yml"
+  subtitle: A Reproducible Computational Review
+  description: >
+    Update this description for your review topic.
+  keywords:
+    - neuroscience
+    - critical review
+    - reproducible research
+  license: MIT
+  open_access: true
+  numbering:
+    figure:
+      continue: true
+    table:
+      continue: true
+    equation:
+      continue: true
+    code:
+      continue: true
+  plugins:
+    - plugins/authorship-plugin.mjs
+    - plugins/evidence-explorer-plugin.mjs
+    - plugins/figure-lightbox-plugin.mjs
+  github: https://github.com/AllenNeuralDynamics/ComputationalReviewTemplate
+  bibliography:
+    - content/references.bib
+  toc:
+    - file: content/00_frontmatter.md
+    - file: content/01_introduction.md
+    - file: content/Methods.md
+      title: Methods
+    - file: content/evidence_database.md
+      title: Evidence Database
+    - file: content/provenance.md
+      title: Pipeline Provenance
+  exports:
+    - format: tex
+      output: review_manuscript.tex
+      template: ./latex/template
+    - format: pdf
+      output: review_manuscript.pdf
+      template: ./latex/template
+site:
+  template: book-theme
+  title: "Computational Review"
+  nav:
+    - title: GitHub
+      url: https://github.com/AllenNeuralDynamics/ComputationalReviewTemplate
