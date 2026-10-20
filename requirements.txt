@@ -1,0 +1,6 @@
+mystmd
+matplotlib
+numpy
+pandas
+seaborn
+jupyter
