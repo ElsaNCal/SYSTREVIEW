@@ -1,0 +1,36 @@
+jtex: v1
+title: Computational Review LaTeX
+description: Custom plain-LaTeX template for ComputationalReview manuscripts. Uses 1-inch margins (geometry), 11pt body, and full-line-width figures by default.
+version: 1.0.0
+license: CC-BY-4.0
+authors:
+  - name: AllenNeuralDynamics
+    github: AllenNeuralDynamics
+tags:
+  - article
+  - review
+parts:
+  - id: abstract
+    description: Abstract text rendered above the body.
+doc:
+  - id: title
+    required: true
+  - id: authors
+    required: false
+  - id: date
+  - id: bibliography
+options:
+  - id: link
+    type: string
+    title: Footnote Link
+    description: Adds a footnote with a link back to the online version.
+files:
+  - template.tex
+packages:
+  - datetime
+  - graphicx
+  - hyperref
+  - natbib
+  - geometry
+  - float
+  - caption
